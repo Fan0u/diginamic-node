@@ -1,9 +1,10 @@
-import events from 'events' ;
+import events from "events";
 
 const monEmetteur = new events.EventEmitter();
-const COMMENCE = 'Matin commence pour de vrai'
+const COMMENCE = "Debut de l'action";
+const FIN = "Fin de laction";
 
 const monEmetteurPostSieste = new events.EventEmitter();
 
 export default monEmetteur;
-export {COMMENCE, monEmetteurPostSieste};
+export { COMMENCE, FIN, monEmetteurPostSieste };

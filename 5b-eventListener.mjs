@@ -1,8 +1,13 @@
-import { COMMENCE } from './5-events.mjs';
+import { COMMENCE, FIN } from "./5-events.mjs";
 
-const routineMatthieu =  (emetteur) => {
-    emetteur.on(COMMENCE, () => console.log('Fetch cafe'));
-    emetteur.on(COMMENCE, () => console.log('Connexion à la formation Diginamic'));
-}
+const traitementMatin = (heure) => console.log("Connexion à la formation Diginamic", `il est déja ${heure}`);
+const traitementAutre = () => console.log("Revenir à la formation Diginamic");
+
+const routineMatthieu = (emetteur) => {
+  emetteur.on(COMMENCE, () => console.log("Fetch cafe"));
+  emetteur.on(FIN, ({reponse, heure}) => 
+    reponse === "Matin" ? traitementMatin(heure) : traitementAutre()
+  );
+};
 
 export default routineMatthieu;

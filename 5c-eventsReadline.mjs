@@ -1,7 +1,7 @@
 import readline from 'readline'
 import monEmetteur from './5-events.mjs'
 import { monEmetteurPostSieste } from './5-events.mjs';
-import { COMMENCE } from './5-events.mjs';
+import { COMMENCE, FIN } from './5-events.mjs';
 import routineMatthieu from './5b-eventListener.mjs'
 import routinePatate from './5b-eventListenerPatate.mjs';
 
@@ -17,6 +17,7 @@ routinePatate(monEmetteur);
 routinePatate(monEmetteurPostSieste);
 
 reveille.question('Drrrrring ! ', (reponse) => {
-    reponse === 'matin' ? monEmetteur.emit(COMMENCE): monEmetteurPostSieste.emit(COMMENCE)
-    reveille.close();
+    monEmetteur.emit(COMMENCE, reponse)
+    setTimeout(() => monEmetteur.emit(FIN, {reponse, heure: '10h04'}), 5000)
+    setTimeout(() => reveille.close(), 7000)
 })
