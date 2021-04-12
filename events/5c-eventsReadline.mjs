@@ -16,6 +16,10 @@ routineMatthieu(monEmetteur);
 routinePatate(monEmetteur);
 routinePatate(monEmetteurPostSieste);
 
+console.log("Nombre d'action effectuées au debut du reveil : ", monEmetteur.listenerCount(COMMENCE))
+console.log("Action effectuées au debut du reveil : ", monEmetteur.rawListeners(COMMENCE))
+console.log("Nombre d'action effectuées à la fin du reveil : ", monEmetteur.listenerCount(FIN))
+
 reveille.question("Drrrrring ! ", (reponse) => {
   monEmetteur.emit(COMMENCE, reponse);
   setTimeout(() => monEmetteur.emit(FIN, { reponse, heure: "10h04" }), 5000);

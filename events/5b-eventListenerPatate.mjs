@@ -1,8 +1,11 @@
-import { COMMENCE } from './5-events.mjs';
+import { COMMENCE } from "./5-events.mjs";
 
-const routinePatate =  (emetteur) => {
-    emetteur.on(COMMENCE, () => console.log("J'attend devant la porte"));
-    emetteur.on(COMMENCE, () => console.log("Je vais pisser"));
-}
+const attendre = () => console.log("J'attend devant la porte");
+const allezPisser = () => console.log("Je vais pisser");
+
+const routinePatate = (emetteur) => {
+  emetteur.on(COMMENCE, attendre);
+  emetteur.on(COMMENCE, allezPisser);
+};
 
 export default routinePatate;
