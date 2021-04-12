@@ -4,7 +4,7 @@ const traitementMatin = (heure) => console.log("Connexion à la formation Digina
 const traitementAutre = () => console.log("Revenir à la formation Diginamic");
 const faireDuCafe = () => console.log("Fetch cafe")
 
-const routineMatthieu = (emetteur) => {
+function routineMatthieu(emetteur) {
   emetteur.on(COMMENCE, faireDuCafe);
   emetteur.on(FIN, ({reponse, heure}) => 
     reponse === "Matin" ? traitementMatin(heure) : traitementAutre()
