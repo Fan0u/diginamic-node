@@ -2,7 +2,8 @@ const http = require('http');
 
 const todos = [
     { nom : 'Faire les courses', done: false},
-    { nom : 'Prendre un cafe', done: true}
+    { nom : 'Prendre un cafe', done: true},
+    { nom : 'Expliquer clairement', done: true}
 ]
 
 let requeteCount = 1;
