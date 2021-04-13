@@ -11,8 +11,6 @@ const server = http.createServer((req, rep) => {
     const {url, headers} = req;
     switch (url) {
         case "/todos":
-            const currentUrl = new URL(url, `http://${headers.host}`);
-            console.log(currentUrl.searchParams.has('id'))
             rep.writeHead(200, {'content-type': 'application/json'})
             .write(JSON.stringify(todos))
             break;
