@@ -1,9 +1,10 @@
 const http = require("http");
 
 const option = {
+  hostname: "localhost",
   path: "/todos",
   port: 8080,
-  method: 'POST'
+  method: "GET",
 };
 
 const traiterTodo = (todos) => {
@@ -14,8 +15,8 @@ const traiterTodo = (todos) => {
 
 const req = http.request(option, (repEmitter) => {
   let reponse = "";
-  repEmitter.on("data", (data) => (reponse += data));
-  repEmitter.on("end", () => traiterTodo(JSON.parse(reponse)));
+  repEmitter.on("data", (data) => console.log(`${data}`));
+  repEmitter.on("end", () => console.log('end'));
 });
 
 req.end();

@@ -12,7 +12,7 @@ const server = http.createServer((req, rep) => {
     const {url, headers} = req;
     switch (url) {
         case "/todos":
-            rep.writeHead(200, {'content-type': 'application/json'})
+            rep.writeHead(200, {'content-type': 'text/json'})
             .write(JSON.stringify(todos))
             break;
         case "/health":
