@@ -14,6 +14,8 @@ USER.init(
   { sequelize }
 );
 
-sequelize.sync({ alter: true }).then(() => {
-  USER.create({ nom: "mauny", isAdmin: true });
+sequelize.sync({ alter: true }).then(async () => {
+  await USER.create({ nom: "mauny", isAdmin: true });
+  const user = await USER.findByPk(2);
+  console.log('user : ', user.dataValues)
 });
