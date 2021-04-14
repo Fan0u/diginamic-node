@@ -15,7 +15,7 @@ USER.init(
 );
 
 sequelize.sync({ alter: true }).then(async () => {
-  await USER.create({ nom: "mauny", isAdmin: true });
-  const user = await USER.findByPk(2);
-  console.log('user : ', user.dataValues)
+  await USER.create({ nom: "marin", isAdmin: false });
+  const users = await USER.findAll({where : Sequelize.or({isAdmin : true}, {nom:'marin'})});
+  users.forEach(user => console.log(user.dataValues))
 });
