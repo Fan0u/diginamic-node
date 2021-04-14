@@ -16,6 +16,14 @@ USER.init(
 
 sequelize.sync({ alter: true }).then(async () => {
   await USER.create({ nom: "marin", isAdmin: false });
-  const users = await USER.findAll({where : Sequelize.or({isAdmin : true}, {nom:'marin'})});
-  users.forEach(user => console.log(user.dataValues))
+  let users = await USER.findAll({
+    where: Sequelize.or({ isAdmin: true }, { nom: "marin" }),
+  });
+  console.log("Nombre de Marin ou admin", users.length);
+  console.log("delete des admin");
+  await USER.destroy({ where: { isAdmin: true } });
+  users = await USER.findAll({
+    where: Sequelize.or({ isAdmin: true }, { nom: "marin" }),
+  });
+  console.log("Nombre de Marin ou admin", users.length);
 });
