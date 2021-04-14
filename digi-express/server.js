@@ -2,7 +2,11 @@ const express = require('express');
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json(corsOptions));
+
+var corsOptions = {
+    origin: 'http://example.com',
+ }
 
 let livres = [
      { titre: "Betty", auteur: "Tiffany McDaniel"},
@@ -15,7 +19,7 @@ app.get('/livres', (req, rep) => {
 
 app.get('/livres/:auteur', (req, rep) => {
     const auteurSelectionne = req.params.auteur;
-    rep.json(livres.filter(livre => livre.auteur === auteurSelectionne))
+    rep.json(livres.filter(livre => livre.auteur.includes(auteurSelectionne)))
 })
 
 app.post('/livres', (req, rep) => {
