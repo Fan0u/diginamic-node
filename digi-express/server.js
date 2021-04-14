@@ -2,22 +2,26 @@ const express = require('express');
 
 const app = express();
 
-const todos = [
-     { description: "Faire les courses", done: false},
-     { description: "Expliquer les bases d'express !", done: true}
+app.use(express.json());
+
+let livres = [
+     { titre: "Betty", auteur: "Tiffany McDaniel"},
+     { titre: "Quatre vingt treize", auteur: "Hugo"}
     ]
 
-app.get('/todos', (req, rep) => {
-    rep.json(todos)
+app.get('/livres', (req, rep) => {
+    rep.json(livres)
 })
 
-app.get('/todos/:status', (req, rep) => {
-    const status = req.params.status;
-    rep.json(todos.filter(todo => todo[status]))
+app.get('/livres/:auteur', (req, rep) => {
+    const auteurSelectionne = req.params.auteur;
+    rep.json(livres.filter(livre => livre.auteur === auteurSelectionne))
 })
 
-app.post('/todos', (req, rep) => {
-    rep.send('requete post !')
-})
+app.post('/livres', (req, rep) => {
+    const nouveauLivre = req.body
+    livres = [...livres, nouveauLivre]
+    rep.json(livres)
+}) 
 
 app.listen(8000, () => console.log('On écoute sur le port 8000 !'))
