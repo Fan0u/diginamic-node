@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
+    "startAuthent": "nodemon serverAuth.js",
     "test": "jest --watch"
   },
   "author": "",
