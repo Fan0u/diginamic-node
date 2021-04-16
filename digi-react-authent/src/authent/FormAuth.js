@@ -1,34 +1,46 @@
-const { useState } = require("react");
+import { useState } from "react";
+import { Form, Button, Input } from "antd";
 
 const FormAuthent = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-
   const connectHandler = () => {
-      fetch('/login', {method:'POST', headers: {'content-type':'application/json'}, body: JSON.stringify({login,password})})
+    fetch("/login", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ login, password }),
+    })
       .then((reponse) => reponse.json())
-      .then((reponse) => reponse.token ? setMessage('Connecté'): setMessage('oups'))
+      .then((reponse) =>
+        reponse.token ? setMessage("Connecté") : setMessage("oups")
+      );
+  };
+
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 8 },
+  };
+  const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
   };
 
   return (
-      <div>
-      <label>
-        Login :
-        <input value={login} onChange={(e) => setLogin(e.target.value)}></input>
-      </label>
-      <label>
-        Mot de passe :
-        <input
+    <Form {...layout}>
+      <Form.Item label={"Login"}>
+        <Input value={login} onChange={(e) => setLogin(e.target.value)}/>
+      </Form.Item>
+      <Form.Item label={"Mot de passe"}>
+        <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           type="password"
-        ></input>
-      </label>
-      <button onClick={connectHandler}>Connecter</button>
+        />
+      </Form.Item>
+      <Button type="primary" htmlType="submit" onClick={connectHandler}>Connecter</Button>
       {message}
-      </div>
+    </Form>
   );
 };
 
